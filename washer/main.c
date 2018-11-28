@@ -65,6 +65,7 @@ int main(int argc)
         mybuf.sem_op = 1;
         mybuf.sem_flg = 0;
         mybuf.sem_num = 0;
+        semop(semid, &mybuf, 1);
     }
     pid = fork();
     if(pid > 0) //Мойщик, родитель
@@ -83,6 +84,7 @@ int main(int argc)
             mybuf.sem_op = -1;
             mybuf.sem_flg = 0;
             mybuf.sem_num = 0;
+            semop(semid, &mybuf, 1);
         }
         sprintf(s, "%d", wareSize[k]);
         write(fd[0], s, 2);
@@ -111,6 +113,7 @@ int main(int argc)
                 mybuf.sem_op = 1;
                 mybuf.sem_flg = 0;
                 mybuf.sem_num = 0;
+                semop(semid, &mybuf, 1);
             }
             printf("C:End taking a ware № %d from table.\n", k);
             printf("C:Start washing...\n");
